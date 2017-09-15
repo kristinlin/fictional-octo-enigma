@@ -1,19 +1,18 @@
-
-#JOBS = dict()
-workTypes = ''
-
+import csv
+JOBS = dict()
 
 def readFile() :
-    global workTypes
-    jobLists = open("occupations.csv", "r")
-    workTypes = jobLists.read()
-    jobLists.close()
+    with open('occupations.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        global JOBS
+        for row in reader:
+            JOBS.update({row['Job Class']:
+                         float(row['Percentage'])})
+    
 
-def createDict() :
-    JOBS = workTypes.split()
-    print(JOBS)
-
+            
+            
 readFile()
-createDict()
+print JOBS
 
 
